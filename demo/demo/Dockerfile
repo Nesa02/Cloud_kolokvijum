@@ -1,4 +1,10 @@
-FROM ubuntu:latest
-LABEL authors="Nesa"
+FROM adoptopenjdk:11-jre-hotspot
 
-ENTRYPOINT ["top", "-b"]
+WORKDIR /app
+
+EXPOSE 8080
+
+ARG JAR_FILE=target/*.jar
+ADD ${JAR_FILE} app.jar
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
